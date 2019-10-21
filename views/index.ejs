@@ -2,22 +2,31 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Test</title>
+    <title>Jeopardy Search</title>
     <link rel="stylesheet" type="text/css" href="/css/style.css">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
   </head>
   <body>
     <div class="container">
+      <h1>Search for Jeopardy clues</h1>
       <fieldset>
-        <form action="/" method="post">
-          <input name="city" type="text" class="ghost-input" placeholder="Enter a City" required>
-          <input type="submit" class="ghost-button" value="Get Weather">
+        <form action="/search" method="post">
+          <input name="min_date" type="date" class="ghost-input" placeholder="Enter start date" required>
+          <input name="max_date" type="date" class="ghost-input" placeholder="Enter end date" required>
+          <input type="submit" class="ghost-button" value="Get clues">
         </form>
-        <% if(weather !== null){ %>
-          <p><%= weather %></p>
+        <% if (clues !== null){ %>
+          <table>
+          <% for (var i =  0; i < clues.length; i++) { %>
+             <tr>
+               <td><%= clues[i].answer %></td>
+               <td><%= clues[i].question %></td>
+             </tr>
+          <% } %>
+          </table>
         <% } %>
-        <% if(error !== null){ %>
-          <p><%= error %></p>
+        <% if (error !== null){ %>
+          <p class="error"><%= error %></p>
         <% } %>
       </fieldset>
     </div>
