@@ -29,7 +29,8 @@ app.post('/search', function(req, res) {
   let min_date = req.body.min_date;
   let max_date = req.body.max_date;
   let category = req.body.category;
-  let url = `${JEOPARDY_API_URL}${CLUES_ENDPOINT}?min_date=${min_date}&max_date=${max_date}&category=${category}`
+  let value = req.body.value;
+  let url = `${JEOPARDY_API_URL}${CLUES_ENDPOINT}?min_date=${min_date}&max_date=${max_date}&category=${category}&value=${value}`
 
   request(url, function(err, response, body) {
     if (err) {

@@ -19,14 +19,25 @@
               <option value="<%= categories[i].id %>"><%= categories[i].title %></option>
             <% } %>
           </select>
+          <input name="value" type="number" class="ghost-input" placeholder="Enter clue value">
           <input type="submit" class="ghost-button" value="Get clues">
         </form>
         <% if (clues !== null){ %>
           <table>
+            <td>Answer</td>
+            <td>Question</td>
+            <td>Airdate</td>
+            <td>Category ID</td>
+            <td>Category Name</td>
+            <td>Value</td>
           <% for (var i =  0; i < clues.length; i++) { %>
              <tr>
                <td><%= clues[i].answer %></td>
                <td><%= clues[i].question %></td>
+               <td><%= clues[i].airdate %></td>
+               <td><%= clues[i].category.id %></td>
+               <td><%= clues[i].category.title %></td>
+               <td><%= clues[i].value %></td>
              </tr>
           <% } %>
           </table>
