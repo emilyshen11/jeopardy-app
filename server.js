@@ -41,8 +41,10 @@ app.post('/search', function(req, res) {
     } else {
       let clues = JSON.parse(body);
       if (clues.length === 0) {
+        log.info('Could not find any clues');
         res.render('index', { clues: null, categories: categories, error: `No clues found`});
       } else {
+        log.info(`Returned ${clues.length} clues`);
         res.render('index', { clues: clues, categories: categories, error: null });
       }
     }
