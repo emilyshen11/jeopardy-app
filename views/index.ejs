@@ -11,32 +11,37 @@
       <h1>Search for Jeopardy clues</h1>
       <fieldset>
         <form action="/search" method="post">
-          <h2>Enter start date:</h2>
-          <input name="min_date" type="date" class="ghost-input" placeholder="Enter start date">
-          <h2>Enter end date:</h2>
-          <input name="max_date" type="date" class="ghost-input" placeholder="Enter end date">
+          <h3>Enter start date:</h3>
+          <input name="min_date" type="date" class="ghost-input" placeholder="Enter start date" value="<%= filters.min_date %>" id="min_date">
+          <h3>Enter end date:</h3>
+          <input name="max_date" type="date" class="ghost-input" placeholder="Enter end date" value="<%= filters.max_date %>" id="max_date">
 
-          <h2>Enter category:</h2>
-          <select name="category">
+          <h3>Enter category:</h3>
+          <select name="category" id="category">
             <option value=""></option>
             <% for(var i = 0; i < categories.length; i++) { %>
-              <option value="<%= categories[i].id %>"><%= categories[i].title %></option>
+              <% if (categories[i].id == filters.category) { %>
+                <option value="<%= categories[i].id %>" selected><%= categories[i].title %></option>
+              <% } else { %>
+                <option value="<%= categories[i].id %>"><%= categories[i].title %></option>
+              <% } %>
             <% } %>
           </select>
 
-          <h2>Enter value:</h2>
-          <input name="value" type="number" class="ghost-input" placeholder="Enter clue value">
+          <h3>Enter value:</h3>
+          <input name="value" type="number" class="ghost-input" placeholder="Enter clue value" value="<%= filters.value %>" id="value">
 
+          <button class="clear-filter" onclick="clearFilters()">Clear filters</button>
           <input type="submit" class="ghost-button" value="Get clues">
         </form>
         <% if (clues !== null){ %>
           <table>
-            <td>Answer</td>
-            <td>Question</td>
-            <td>Airdate</td>
-            <td>Category ID</td>
-            <td>Category Name</td>
-            <td>Value</td>
+            <th>Answer</th>
+            <th>Question</th>
+            <th>Airdate</th>
+            <th>Category ID</th>
+            <th>Category Name</th>
+            <th>Value</th>
           <% for (var i =  0; i < clues.length; i++) { %>
              <tr>
                <td><%= clues[i].answer %></td>
@@ -54,5 +59,14 @@
         <% } %>
       </fieldset>
     </div>
+
+    <script>
+    function clearFilters() {
+      document.getElementById("min_date").value = "";
+      document.getElementById("max_date").value = "";
+      document.getElementById("category").value = "";
+      document.getElementById("value").value = "";
+    }
+    </script>
   </body>
 </html>
