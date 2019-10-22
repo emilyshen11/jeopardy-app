@@ -11,15 +11,22 @@
       <h1>Search for Jeopardy clues</h1>
       <fieldset>
         <form action="/search" method="post">
+          <h2>Enter start date:</h2>
           <input name="min_date" type="date" class="ghost-input" placeholder="Enter start date">
+          <h2>Enter end date:</h2>
           <input name="max_date" type="date" class="ghost-input" placeholder="Enter end date">
+
+          <h2>Enter category:</h2>
           <select name="category">
             <option value=""></option>
             <% for(var i = 0; i < categories.length; i++) { %>
               <option value="<%= categories[i].id %>"><%= categories[i].title %></option>
             <% } %>
           </select>
+
+          <h2>Enter value:</h2>
           <input name="value" type="number" class="ghost-input" placeholder="Enter clue value">
+
           <input type="submit" class="ghost-button" value="Get clues">
         </form>
         <% if (clues !== null){ %>

@@ -4,12 +4,12 @@
 */
 
 body {
-  width: 800px;
+  width: 1000px;
   margin: 0 auto;
   font-family: 'Open Sans', sans-serif;
 }
 .container {
-  width: 600px;
+  width: 800px;
   margin: 0 auto;
 }
 fieldset {
