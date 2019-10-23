@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const request = require('request');
 const log = require('simple-node-logger').createSimpleLogger();
+const moment = require('moment');
 const app = express();
 
 const JEOPARDY_API_URL = 'http://jservice.io';
@@ -25,12 +26,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 
 app.get('/', function(req, res) {
-  res.render('index', { clues: null, categories: categories, filters: filters, error: null});
+  res.render('index', { clues: null, categories: categories, filters: filters, moment: moment, error: null});
 });
 
 app.post('/search', function(req, res) {
   let filters = req.body;
-  console.log(filters);
 
   let min_date = filters.min_date;
   let max_date = filters.max_date;
@@ -42,15 +42,15 @@ app.post('/search', function(req, res) {
     log.info(`Request received: ${url}`);
     if (err) {
       log.error(err);
-      res.render('index', { clues: null, categories: categories, filters: filters, error: 'Error, please try again' });
+      res.render('index', { clues: null, categories: categories, filters: filters, moment: moment, error: 'Error, please try again' });
     } else {
       let clues = JSON.parse(body);
       if (clues.length === 0) {
         log.info('Could not find any clues');
-        res.render('index', { clues: null, categories: categories, filters: filters, error: `No clues found`});
+        res.render('index', { clues: null, categories: categories, filters: filters, moment: moment, error: `No clues found`});
       } else {
         log.info(`Returned ${clues.length} clues`);
-        res.render('index', { clues: clues, categories: categories, filters: filters, error: null });
+        res.render('index', { clues: clues, categories: categories, filters: filters, moment: moment, error: null });
       }
     }
   });
@@ -58,7 +58,7 @@ app.post('/search', function(req, res) {
 
 app.use(function (err, req, res, next) {
   log.error(err);
-  res.render('index', { clues: null, categories: categories, filters: filters, error: 'Error, please try again' });
+  res.render('index', { clues: null, categories: categories, filters: filters, moment: moment, error: 'Error, please try again' });
 });
 
 app.listen(PORT, function () {

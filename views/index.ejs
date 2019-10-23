@@ -45,7 +45,7 @@
              <tr>
                <td><%= clues[i].question %></td>
                <td><%= clues[i].answer %></td>
-               <td><%= clues[i].airdate %></td>
+               <td><%= moment(clues[i].airdate).format('MM/DD/YYYY') %></td>
                <td><%= clues[i].category.title %></td>
                <td><%= clues[i].value %></td>
              </tr>
