@@ -36,16 +36,16 @@
         </form>
         <% if (clues !== null){ %>
           <table>
-            <th>Answer</th>
             <th>Question</th>
+            <th>Answer</th>
             <th>Airdate</th>
             <th>Category ID</th>
             <th>Category Name</th>
             <th>Value</th>
           <% for (var i =  0; i < clues.length; i++) { %>
              <tr>
-               <td><%= clues[i].answer %></td>
                <td><%= clues[i].question %></td>
+               <td><%= clues[i].answer %></td>
                <td><%= clues[i].airdate %></td>
                <td><%= clues[i].category.id %></td>
                <td><%= clues[i].category.title %></td>
