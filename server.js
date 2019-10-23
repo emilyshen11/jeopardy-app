@@ -7,6 +7,7 @@ const app = express();
 const JEOPARDY_API_URL = 'http://jservice.io';
 const CLUES_ENDPOINT = '/api/clues';
 const CATEGORIES_ENDPOINT = '/api/categories';
+const PORT = process.env.PORT || 3000
 
 let categories = [];
 let filters = [];
@@ -60,6 +61,6 @@ app.use(function (err, req, res, next) {
   res.render('index', { clues: null, categories: categories, filters: filters, error: 'Error, please try again' });
 });
 
-app.listen(process.env.PORT || 3000, function () {
-  console.log('Jeopardy app listening on port 3000!');
+app.listen(PORT, function () {
+  console.log(`Jeopardy app listening on port ${PORT}!`);
 });
