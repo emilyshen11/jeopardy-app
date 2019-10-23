@@ -12,12 +12,12 @@
       <fieldset>
         <form action="/search" method="post">
           <h3>Enter start date:</h3>
-          <input name="min_date" type="date" class="ghost-input" placeholder="Enter start date" value="<%= filters.min_date %>" id="min_date">
+          <input id="min_date" name="min_date" type="date" class="ghost-input" placeholder="Enter start date" value="<%= filters.min_date %>" onkeypress="preventEnter(event)">
           <h3>Enter end date:</h3>
-          <input name="max_date" type="date" class="ghost-input" placeholder="Enter end date" value="<%= filters.max_date %>" id="max_date">
+          <input id="max_date" name="max_date" type="date" class="ghost-input" placeholder="Enter end date" value="<%= filters.max_date %>" onkeypress="preventEnter(event)">
 
           <h3>Enter category:</h3>
-          <select name="category" id="category">
+          <select id="category" name="category" onkeypress="preventEnter(event)">
             <option value=""></option>
             <% for(var i = 0; i < categories.length; i++) { %>
               <% if (categories[i].id == filters.category) { %>
@@ -29,10 +29,10 @@
           </select>
 
           <h3>Enter value:</h3>
-          <input name="value" type="number" class="ghost-input" placeholder="Enter clue value" value="<%= filters.value %>" id="value">
+          <input id="value" name="value" type="number" class="ghost-input" placeholder="Enter clue value" value="<%= filters.value %>" onkeypress="preventEnter(event)">
 
           <button class="clear-filter" onclick="clearFilters()">Clear filters</button>
-          <input type="submit" class="ghost-button" value="Get clues">
+          <input id="submit" type="submit" class="ghost-button" value="Get clues">
         </form>
         <% if (clues !== null){ %>
           <table>
@@ -59,12 +59,18 @@
     </div>
 
     <script>
-    function clearFilters() {
-      document.getElementById("min_date").value = "";
-      document.getElementById("max_date").value = "";
-      document.getElementById("category").value = "";
-      document.getElementById("value").value = "";
-    }
+      function clearFilters() {
+        document.getElementById("min_date").value = "";
+        document.getElementById("max_date").value = "";
+        document.getElementById("category").value = "";
+        document.getElementById("value").value = "";
+      }
+
+      function preventEnter(e) {
+        if (e.keyCode === 13) {
+          e.preventDefault();
+        }
+      }
     </script>
   </body>
 </html>
