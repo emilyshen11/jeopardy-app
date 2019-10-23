@@ -40,11 +40,13 @@ app.post('/search', function(req, res) {
 
   request(url, function(err, response, body) {
     log.info(`Request received: ${url}`);
+
     if (err) {
       log.error(err);
       res.render('index', { clues: null, categories: categories, filters: filters, moment: moment, error: 'Error, please try again' });
     } else {
       let clues = JSON.parse(body);
+
       if (clues.length === 0) {
         log.info('Could not find any clues');
         res.render('index', { clues: null, categories: categories, filters: filters, moment: moment, error: `No clues found`});
